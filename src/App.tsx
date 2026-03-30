@@ -338,8 +338,8 @@ export default function App() {
             exit={{ opacity: 0, scale: 0.8 }}
             className="fixed pointer-events-none z-[100] shadow-2xl rounded-full border-4 border-white bg-white overflow-hidden print-hidden"
             style={{ 
-              left: mousePos.x + 20, 
-              top: mousePos.y + 20,
+              left: mousePos.x + 220 > window.innerWidth ? mousePos.x - 220 : mousePos.x + 20, 
+              top: mousePos.y + 220 > window.innerHeight ? mousePos.y - 220 : mousePos.y + 20,
               width: 200,
               height: 200
             }}
