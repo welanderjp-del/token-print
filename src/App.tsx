@@ -23,18 +23,47 @@ type PrintMode = 'single' | 'double' | 'folded';
 export default function App() {
   const [search, setSearch] = useState('');
   const [showSelectedOnly, setShowSelectedOnly] = useState(false);
-  const [selectedTokens, setSelectedTokens] = useState<SelectedToken[]>([]);
+  const [selectedTokens, setSelectedTokens] = useState<SelectedToken[]>(() => {
+    const saved = localStorage.getItem('selectedTokens');
+    return saved ? JSON.parse(saved) : [];
+  });
   const [previewMonster, setPreviewMonster] = useState<Monster | null>(null);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   
   // Print Settings
-  const [paperSize, setPaperSize] = useState<PaperSize>('A4');
-  const [showGrid, setShowGrid] = useState(true);
-  const [printMode, setPrintMode] = useState<PrintMode>('single');
-  const [showLetters, setShowLetters] = useState(false);
+  const [paperSize, setPaperSize] = useState<PaperSize>(() => {
+    const saved = localStorage.getItem('paperSize');
+    return (saved as PaperSize) || 'A4';
+  });
+  const [showGrid, setShowGrid] = useState<boolean>(() => {
+    const saved = localStorage.getItem('showGrid');
+    return saved !== null ? saved === 'true' : true;
+  });
+  const [printMode, setPrintMode] = useState<PrintMode>(() => {
+    const saved = localStorage.getItem('printMode');
+    return (saved as PrintMode) || 'single';
+  });
+  const [showLetters, setShowLetters] = useState<boolean>(() => {
+    const saved = localStorage.getItem('showLetters');
+    return saved !== null ? saved === 'true' : false;
+  });
+  const [separateSizes, setSeparateSizes] = useState<boolean>(() => {
+    const saved = localStorage.getItem('separateSizes');
+    return saved !== null ? saved === 'true' : false;
+  });
   
   // Reset state
   const [resetConfirm, setResetConfirm] = useState(false);
+
+  // Persistence
+  useEffect(() => {
+    localStorage.setItem('selectedTokens', JSON.stringify(selectedTokens));
+    localStorage.setItem('paperSize', paperSize);
+    localStorage.setItem('showGrid', String(showGrid));
+    localStorage.setItem('printMode', printMode);
+    localStorage.setItem('showLetters', String(showLetters));
+    localStorage.setItem('separateSizes', String(separateSizes));
+  }, [selectedTokens, paperSize, showGrid, printMode, showLetters, separateSizes]);
 
   // Filtered monsters
   const filteredMonsters = useMemo(() => {
@@ -184,15 +213,24 @@ export default function App() {
               </div>
 
               <div className="space-y-2">
-                <label className="text-xs font-bold uppercase tracking-wider text-stone-400">Vis Grid</label>
-                <button
-                  onClick={() => setShowGrid(!showGrid)}
-                  className={`w-full py-1.5 text-sm font-medium rounded-lg border transition-all ${
-                    showGrid ? 'bg-orange-50 border-orange-200 text-orange-600' : 'bg-white border-stone-200 text-stone-500'
-                  }`}
-                >
-                  {showGrid ? 'Grid Til' : 'Grid Fra'}
-                </button>
+                <div className="flex gap-2">
+                  <button
+                    onClick={() => setShowGrid(!showGrid)}
+                    className={`flex-1 py-1.5 text-sm font-medium rounded-lg border transition-all ${
+                      showGrid ? 'bg-orange-50 border-orange-200 text-orange-600' : 'bg-white border-stone-200 text-stone-500'
+                    }`}
+                  >
+                    {showGrid ? 'Grid Til' : 'Grid Fra'}
+                  </button>
+                  <button
+                    onClick={() => setSeparateSizes(!separateSizes)}
+                    className={`flex-1 py-1.5 text-sm font-medium rounded-lg border transition-all ${
+                      separateSizes ? 'bg-orange-50 border-orange-200 text-orange-600' : 'bg-white border-stone-200 text-stone-500'
+                    }`}
+                  >
+                    Adskil størrelser
+                  </button>
+                </div>
               </div>
             </div>
 
@@ -312,6 +350,7 @@ export default function App() {
         showGrid={showGrid} 
         printMode={printMode} 
         showLetters={showLetters} 
+        separateSizes={separateSizes}
       />
 
       <style>{`
@@ -322,6 +361,16 @@ export default function App() {
           }
           body {
             background: white;
+            margin: 0;
+            padding: 0;
+          }
+          .print-page {
+            page-break-after: always;
+            break-after: page;
+          }
+          .break-before-page {
+            page-break-before: always;
+            break-before: page;
           }
           .custom-scrollbar::-webkit-scrollbar {
             display: none;
@@ -345,15 +394,16 @@ export default function App() {
   );
 }
 
-function PrintLayout({ selectedTokens, paperSize, showGrid, printMode, showLetters }: { 
+function PrintLayout({ selectedTokens, paperSize, showGrid, printMode, showLetters, separateSizes }: { 
   selectedTokens: SelectedToken[], 
   paperSize: PaperSize, 
   showGrid: boolean, 
   printMode: PrintMode,
-  showLetters: boolean
+  showLetters: boolean,
+  separateSizes: boolean
 }) {
-  const cols = paperSize === 'A4' ? 8 : 11;
-  const rows = paperSize === 'A4' ? 11 : 16;
+  const cols = paperSize === 'A4' ? 7 : 10;
+  const rows = paperSize === 'A4' ? 10 : 15;
 
   const getSizeInInches = (sizeStr: string) => {
     if (sizeStr.includes('Gargantuan')) return 4;
@@ -363,59 +413,84 @@ function PrintLayout({ selectedTokens, paperSize, showGrid, printMode, showLette
   };
 
   // Flatten and calculate positions
-  const tokenPlacements = useMemo(() => {
-    const placements: { token: SelectedToken, letter: string, x: number, y: number, size: number }[] = [];
-    const grid = Array(rows).fill(0).map(() => Array(cols).fill(false));
-
+  const pages = useMemo(() => {
+    const allPages: { token: SelectedToken, letter: string, x: number, y: number, size: number }[][] = [];
     let currentLetterIdx = 0;
 
-    selectedTokens.forEach((st) => {
-      const letter = String.fromCharCode(65 + (currentLetterIdx % 26));
-      currentLetterIdx++;
-      const size = getSizeInInches(st.size);
-      const h = printMode === 'folded' ? size * 2 : size;
-      const w = size;
+    const tokensToPlace = [...selectedTokens];
+    
+    // Group by size if separateSizes is true
+    const groups = separateSizes 
+      ? Array.from(new Set(tokensToPlace.map(t => getSizeInInches(t.size))))
+          .sort((a, b) => b - a) // Sort by size descending
+          .map(size => tokensToPlace.filter(t => getSizeInInches(t.size) === size))
+      : [tokensToPlace];
 
-      for (let q = 0; q < st.quantity; q++) {
-        let placed = false;
-        for (let r = 0; r <= rows - h; r++) {
-          for (let c = 0; c <= cols - w; c++) {
-            // Check if space is free
-            let free = true;
-            for (let i = 0; i < h; i++) {
-              for (let j = 0; j < w; j++) {
-                if (grid[r + i][c + j]) {
-                  free = false;
-                  break;
-                }
-              }
-              if (!free) break;
-            }
+    groups.forEach(group => {
+      let currentPage: { token: SelectedToken, letter: string, x: number, y: number, size: number }[] = [];
+      let grid = Array(rows).fill(0).map(() => Array(cols).fill(false));
 
-            if (free) {
-              // Occupy space
+      group.forEach((st) => {
+        const size = getSizeInInches(st.size);
+        const h = printMode === 'folded' ? size * 2 : size;
+        const w = size;
+
+        for (let q = 0; q < st.quantity; q++) {
+          const letter = String.fromCharCode(65 + (currentLetterIdx % 26));
+          currentLetterIdx++;
+          
+          let placed = false;
+          for (let r = 0; r <= rows - h; r++) {
+            for (let c = 0; c <= cols - w; c++) {
+              let free = true;
               for (let i = 0; i < h; i++) {
                 for (let j = 0; j < w; j++) {
-                  grid[r + i][c + j] = true;
+                  if (grid[r + i][c + j]) {
+                    free = false;
+                    break;
+                  }
                 }
+                if (!free) break;
               }
-              placements.push({ token: st, letter, x: c, y: r, size });
-              placed = true;
-              break;
+
+              if (free) {
+                for (let i = 0; i < h; i++) {
+                  for (let j = 0; j < w; j++) {
+                    grid[r + i][c + j] = true;
+                  }
+                }
+                currentPage.push({ token: st, letter, x: c, y: r, size });
+                placed = true;
+                break;
+              }
+            }
+            if (placed) break;
+          }
+
+          if (!placed) {
+            // New page for the same group
+            allPages.push(currentPage);
+            currentPage = [{ token: st, letter, x: 0, y: 0, size }];
+            grid = Array(rows).fill(0).map(() => Array(cols).fill(false));
+            for (let i = 0; i < h; i++) {
+              for (let j = 0; j < w; j++) {
+                grid[i][j] = true;
+              }
             }
           }
-          if (placed) break;
         }
+      });
+      if (currentPage.length > 0) {
+        allPages.push(currentPage);
       }
     });
 
-    return placements;
-  }, [selectedTokens, printMode, cols, rows]);
+    return allPages;
+  }, [selectedTokens, printMode, cols, rows, separateSizes]);
 
-  const renderToken = (p: typeof tokenPlacements[0], idx: number, isBackSide = false) => {
+  const renderToken = (p: { token: SelectedToken, letter: string, x: number, y: number, size: number }, idx: number, isBackSide = false) => {
     const { token, letter, x, y, size } = p;
     
-    // For double sided, we flip the X position across the page
     const finalX = isBackSide ? (cols - x - size) : x;
     
     const style: React.CSSProperties = {
@@ -466,33 +541,61 @@ function PrintLayout({ selectedTokens, paperSize, showGrid, printMode, showLette
 
   return (
     <div className="hidden print:block bg-white">
-      {/* Page 1 */}
-      <div className="relative overflow-hidden bg-white" style={{ width: paperSize === 'A4' ? '210mm' : '297mm', height: paperSize === 'A4' ? '297mm' : '420mm' }}>
-        {showGrid && (
-          <div className="absolute inset-0 pointer-events-none opacity-10" style={{ 
-            backgroundImage: `linear-gradient(to right, #000 1px, transparent 1px), linear-gradient(to bottom, #000 1px, transparent 1px)`,
-            backgroundSize: '1in 1in'
-          }} />
-        )}
-        <div className="relative h-full w-full">
-          {tokenPlacements.map((p, i) => renderToken(p, i))}
-        </div>
-      </div>
-
-      {/* Page 2 for Double Sided */}
-      {printMode === 'double' && (
-        <div className="relative overflow-hidden bg-white break-before-page" style={{ width: paperSize === 'A4' ? '210mm' : '297mm', height: paperSize === 'A4' ? '297mm' : '420mm' }}>
-          {showGrid && (
-            <div className="absolute inset-0 pointer-events-none opacity-10" style={{ 
-              backgroundImage: `linear-gradient(to right, #000 1px, transparent 1px), linear-gradient(to bottom, #000 1px, transparent 1px)`,
-              backgroundSize: '1in 1in'
-            }} />
-          )}
-          <div className="relative h-full w-full">
-            {tokenPlacements.map((p, i) => renderToken(p, i, true))}
+      {pages.map((pageTokens, pageIdx) => (
+        <React.Fragment key={pageIdx}>
+          {/* Front Side */}
+          <div className={`print-page relative overflow-hidden bg-white ${pageIdx > 0 ? 'break-before-page' : ''}`} 
+               style={{ 
+                 width: paperSize === 'A4' ? '210mm' : '297mm', 
+                 height: paperSize === 'A4' ? '297mm' : '420mm',
+                 padding: '10mm',
+                 display: 'flex',
+                 justifyContent: 'center',
+                 alignItems: 'center'
+               }}>
+            <div className="relative" style={{ width: `${cols}in`, height: `${rows}in` }}>
+              {showGrid && (
+                <div className="absolute inset-0 pointer-events-none" style={{ 
+                  backgroundImage: `linear-gradient(to right, rgba(0,0,0,0.2) 1px, transparent 1px), linear-gradient(to bottom, rgba(0,0,0,0.2) 1px, transparent 1px)`,
+                  backgroundSize: '1in 1in',
+                  width: `${cols}in`,
+                  height: `${rows}in`,
+                  borderRight: '1px solid rgba(0,0,0,0.2)',
+                  borderBottom: '1px solid rgba(0,0,0,0.2)'
+                }} />
+              )}
+              {pageTokens.map((p, i) => renderToken(p, i))}
+            </div>
           </div>
-        </div>
-      )}
+
+          {/* Back Side for Double Sided */}
+          {printMode === 'double' && (
+            <div className="print-page relative overflow-hidden bg-white break-before-page" 
+                 style={{ 
+                   width: paperSize === 'A4' ? '210mm' : '297mm', 
+                   height: paperSize === 'A4' ? '297mm' : '420mm',
+                   padding: '10mm',
+                   display: 'flex',
+                   justifyContent: 'center',
+                   alignItems: 'center'
+                 }}>
+              <div className="relative" style={{ width: `${cols}in`, height: `${rows}in` }}>
+                {showGrid && (
+                  <div className="absolute inset-0 pointer-events-none" style={{ 
+                    backgroundImage: `linear-gradient(to right, rgba(0,0,0,0.2) 1px, transparent 1px), linear-gradient(to bottom, rgba(0,0,0,0.2) 1px, transparent 1px)`,
+                    backgroundSize: '1in 1in',
+                    width: `${cols}in`,
+                    height: `${rows}in`,
+                    borderRight: '1px solid rgba(0,0,0,0.2)',
+                    borderBottom: '1px solid rgba(0,0,0,0.2)'
+                  }} />
+                )}
+                {pageTokens.map((p, i) => renderToken(p, i, true))}
+              </div>
+            </div>
+          )}
+        </React.Fragment>
+      ))}
     </div>
   );
 }
