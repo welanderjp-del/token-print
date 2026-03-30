@@ -122,10 +122,20 @@ export default function App() {
   };
 
   return (
-    <div className="h-screen print:h-auto bg-stone-100 text-stone-900 font-sans flex flex-col" onMouseMove={handleMouseMove}>
+    <div className="min-h-screen bg-stone-100 text-stone-900 font-sans flex flex-col print:min-h-0 print:p-0 print:m-0" onMouseMove={handleMouseMove}>
+      {/* Print View (Hidden in UI, visible in print) */}
+      <PrintLayout 
+        selectedTokens={selectedTokens} 
+        paperSize={paperSize} 
+        showGrid={showGrid} 
+        printMode={printMode} 
+        showLetters={showLetters} 
+        separateSizes={separateSizes}
+      />
+
       {/* Header */}
-      <header className="bg-white border-b border-stone-200 p-4 flex items-center justify-between sticky top-0 z-50 print:hidden">
-        <div className="flex items-center gap-3 cursor-pointer" onClick={() => window.location.href = 'https://skolechips.dk'}>
+      <header className="bg-white border-b border-stone-200 p-4 flex items-center justify-between sticky top-0 z-50 print-hidden">
+        <div className="flex items-center gap-3 cursor-pointer" onClick={() => window.location.href = 'https://skolechips.dk/?dnd=true'}>
           <img 
             src="https://res.cloudinary.com/dtw8jfk0k/image/upload/v1774706790/d4b01caa-2d0a-405a-b893-1a04cfefab27_qf9jsx.png" 
             alt="Logo" 
@@ -136,7 +146,7 @@ export default function App() {
         </div>
       </header>
 
-      <main className="flex-1 flex overflow-hidden print:hidden">
+      <main className="flex-1 flex overflow-hidden print-hidden">
         {/* Left Side: Monster List */}
         <div className="w-1/2 flex flex-col border-r border-stone-200 bg-white">
           <div className="p-4 border-b border-stone-100 space-y-4">
@@ -326,7 +336,7 @@ export default function App() {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.8 }}
-            className="fixed pointer-events-none z-[100] shadow-2xl rounded-full border-4 border-white bg-white overflow-hidden"
+            className="fixed pointer-events-none z-[100] shadow-2xl rounded-full border-4 border-white bg-white overflow-hidden print-hidden"
             style={{ 
               left: mousePos.x + 20, 
               top: mousePos.y + 20,
@@ -367,13 +377,19 @@ export default function App() {
             -webkit-print-color-adjust: exact;
             print-color-adjust: exact;
           }
+          .print-hidden {
+            display: none !important;
+          }
           .print-page {
             page-break-after: always;
             break-after: page;
+            position: relative;
+            width: ${paperSize === 'A4' ? '210mm' : '297mm'};
+            height: ${paperSize === 'A4' ? '297mm' : '420mm'};
           }
-          .break-before-page {
-            page-break-before: always;
-            break-before: page;
+          .print-page:last-child {
+            page-break-after: auto;
+            break-after: auto;
           }
           .custom-scrollbar::-webkit-scrollbar {
             display: none;
@@ -421,6 +437,7 @@ function PrintLayout({ selectedTokens, paperSize, showGrid, printMode, showLette
     let currentLetterIdx = 0;
 
     const tokensToPlace = [...selectedTokens];
+    if (tokensToPlace.length === 0) return [];
     
     // Group by size if separateSizes is true
     const groups = separateSizes 
@@ -430,6 +447,7 @@ function PrintLayout({ selectedTokens, paperSize, showGrid, printMode, showLette
       : [tokensToPlace];
 
     groups.forEach(group => {
+      if (group.length === 0) return;
       let currentPage: { token: SelectedToken, letter: string, x: number, y: number, size: number }[] = [];
       let grid = Array(rows).fill(0).map(() => Array(cols).fill(false));
 
@@ -491,6 +509,8 @@ function PrintLayout({ selectedTokens, paperSize, showGrid, printMode, showLette
     return allPages;
   }, [selectedTokens, printMode, cols, rows, separateSizes]);
 
+  if (pages.length === 0) return null;
+
   const renderToken = (p: { token: SelectedToken, letter: string, x: number, y: number, size: number }, idx: number, isBackSide = false) => {
     const { token, letter, x, y, size } = p;
     
@@ -512,7 +532,7 @@ function PrintLayout({ selectedTokens, paperSize, showGrid, printMode, showLette
           <div style={{ ...style, transform: 'scaleY(-1)' }} className="flex items-center justify-center border-b border-dashed border-stone-300">
             <img src={token.tokenUrl} alt={token.name} className="w-full h-full rounded-full" referrerPolicy="no-referrer" />
             {showLetters && (
-              <div className="absolute top-1 left-1 w-5 h-5 bg-white border border-black rounded-full flex items-center justify-center text-[9px] font-bold z-10 transform scaleY(-1)">
+              <div className="absolute bottom-1 left-1 w-5 h-5 bg-white border border-black rounded-full flex items-center justify-center text-[9px] font-bold z-10 transform scaleY(-1)">
                 {letter}
               </div>
             )}
@@ -543,11 +563,11 @@ function PrintLayout({ selectedTokens, paperSize, showGrid, printMode, showLette
   };
 
   return (
-    <div className="hidden print:block bg-white">
+    <div className="hidden print:block bg-white p-0 m-0">
       {pages.map((pageTokens, pageIdx) => (
         <React.Fragment key={pageIdx}>
           {/* Front Side */}
-          <div className={`print-page relative overflow-hidden bg-white ${pageIdx > 0 ? 'break-before-page' : ''}`} 
+          <div className="print-page relative overflow-hidden bg-white box-border" 
                style={{ 
                  width: paperSize === 'A4' ? '210mm' : '297mm', 
                  height: paperSize === 'A4' ? '297mm' : '420mm',
@@ -556,24 +576,23 @@ function PrintLayout({ selectedTokens, paperSize, showGrid, printMode, showLette
                  justifyContent: 'center',
                  alignItems: 'center'
                }}>
+            {showGrid && (
+              <div className="absolute inset-0 pointer-events-none" style={{ 
+                backgroundImage: `linear-gradient(to right, #ccc 1px, transparent 1px), linear-gradient(to bottom, #ccc 1px, transparent 1px)`,
+                backgroundSize: '1in 1in',
+                width: '100%',
+                height: '100%',
+                opacity: 0.5
+              }} />
+            )}
             <div className="relative" style={{ width: `${cols}in`, height: `${rows}in` }}>
-              {showGrid && (
-                <div className="absolute inset-0 pointer-events-none" style={{ 
-                  backgroundImage: `linear-gradient(to right, #ccc 1px, transparent 1px), linear-gradient(to bottom, #ccc 1px, transparent 1px)`,
-                  backgroundSize: '1in 1in',
-                  width: `${cols}in`,
-                  height: `${rows}in`,
-                  borderRight: '1px solid #ccc',
-                  borderBottom: '1px solid #ccc'
-                }} />
-              )}
               {pageTokens.map((p, i) => renderToken(p, i))}
             </div>
           </div>
 
           {/* Back Side for Double Sided */}
           {printMode === 'double' && (
-            <div className="print-page relative overflow-hidden bg-white" 
+            <div className="print-page relative overflow-hidden bg-white box-border" 
                  style={{ 
                    width: paperSize === 'A4' ? '210mm' : '297mm', 
                    height: paperSize === 'A4' ? '297mm' : '420mm',
@@ -582,17 +601,16 @@ function PrintLayout({ selectedTokens, paperSize, showGrid, printMode, showLette
                    justifyContent: 'center',
                    alignItems: 'center'
                  }}>
+              {showGrid && (
+                <div className="absolute inset-0 pointer-events-none" style={{ 
+                  backgroundImage: `linear-gradient(to right, #ccc 1px, transparent 1px), linear-gradient(to bottom, #ccc 1px, transparent 1px)`,
+                  backgroundSize: '1in 1in',
+                  width: '100%',
+                  height: '100%',
+                  opacity: 0.5
+                }} />
+              )}
               <div className="relative" style={{ width: `${cols}in`, height: `${rows}in` }}>
-                {showGrid && (
-                  <div className="absolute inset-0 pointer-events-none" style={{ 
-                    backgroundImage: `linear-gradient(to right, #ccc 1px, transparent 1px), linear-gradient(to bottom, #ccc 1px, transparent 1px)`,
-                    backgroundSize: '1in 1in',
-                    width: `${cols}in`,
-                    height: `${rows}in`,
-                    borderRight: '1px solid #ccc',
-                    borderBottom: '1px solid #ccc'
-                  }} />
-                )}
                 {pageTokens.map((p, i) => renderToken(p, i, true))}
               </div>
             </div>
