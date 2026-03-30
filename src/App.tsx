@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useEffect, useRef } from 'react';
-import { Search, Printer, RotateCcw, Check, ChevronRight, ChevronLeft, Plus, Minus, Trash2, Eye } from 'lucide-react';
+import { Search, Printer, RotateCcw, Check, ChevronRight, ChevronLeft, Plus, Minus, Trash2, Eye, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import monsterData from './monster-tokens.json';
 import sourceNames from './source-names.json';
@@ -54,6 +54,7 @@ export default function App() {
   
   // Reset state
   const [resetConfirm, setResetConfirm] = useState(false);
+  const searchInputRef = useRef<HTMLInputElement>(null);
 
   // Persistence
   useEffect(() => {
@@ -67,12 +68,15 @@ export default function App() {
 
   // Filtered monsters
   const filteredMonsters = useMemo(() => {
+    if (showSelectedOnly) {
+      return (monsterData as Monster[]).filter(m => 
+        selectedTokens.some(st => st.name === m.name && st.source === m.source && st.size === m.size)
+      ).slice(0, 150);
+    }
+    
     let list = monsterData as Monster[];
     if (search) {
       list = list.filter(m => m.name.toLowerCase().includes(search.toLowerCase()));
-    }
-    if (showSelectedOnly) {
-      list = list.filter(m => selectedTokens.some(st => st.name === m.name && st.source === m.source && st.size === m.size));
     }
     return list.slice(0, 150); // Limit display for performance
   }, [search, showSelectedOnly, selectedTokens]);
@@ -90,6 +94,19 @@ export default function App() {
     setSelectedTokens(selectedTokens.map(st => 
       st.id === id ? { ...st, quantity: Math.max(1, st.quantity + delta) } : st
     ));
+  };
+
+  const clearSearch = () => {
+    setSearch('');
+    searchInputRef.current?.focus();
+  };
+
+  const toggleShowSelected = () => {
+    if (!showSelectedOnly) {
+      // Switching to "Show selected"
+      setSearch('');
+    }
+    setShowSelectedOnly(!showSelectedOnly);
   };
 
   const handleMouseMove = (e: React.MouseEvent) => {
@@ -153,15 +170,24 @@ export default function App() {
             <div className="relative">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-stone-400" />
               <input 
+                ref={searchInputRef}
                 type="text" 
                 placeholder="Søg efter monstre..." 
-                className="w-full pl-10 pr-4 py-2 bg-stone-50 border border-stone-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 transition-all"
+                className="w-full pl-10 pr-10 py-2 bg-stone-50 border border-stone-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 transition-all"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
               />
+              {search && (
+                <button 
+                  onClick={clearSearch}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 p-1 hover:bg-stone-200 rounded-full transition-colors"
+                >
+                  <X className="w-4 h-4 text-red-500" />
+                </button>
+              )}
             </div>
             <button 
-              onClick={() => setShowSelectedOnly(!showSelectedOnly)}
+              onClick={toggleShowSelected}
               className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
                 showSelectedOnly ? 'bg-orange-500 text-white' : 'bg-stone-100 text-stone-600 hover:bg-stone-200'
               }`}
