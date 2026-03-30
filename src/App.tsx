@@ -354,16 +354,6 @@ export default function App() {
         )}
       </AnimatePresence>
 
-      {/* Print View (Hidden in UI, visible in print) */}
-      <PrintLayout 
-        selectedTokens={selectedTokens} 
-        paperSize={paperSize} 
-        showGrid={showGrid} 
-        printMode={printMode} 
-        showLetters={showLetters} 
-        separateSizes={separateSizes}
-      />
-
       <style>{`
         @media print {
           @page {
@@ -576,16 +566,18 @@ function PrintLayout({ selectedTokens, paperSize, showGrid, printMode, showLette
                  justifyContent: 'center',
                  alignItems: 'center'
                }}>
-            {showGrid && (
-              <div className="absolute inset-0 pointer-events-none" style={{ 
-                backgroundImage: `linear-gradient(to right, #ccc 1px, transparent 1px), linear-gradient(to bottom, #ccc 1px, transparent 1px)`,
-                backgroundSize: '1in 1in',
-                width: '100%',
-                height: '100%',
-                opacity: 0.5
-              }} />
-            )}
             <div className="relative" style={{ width: `${cols}in`, height: `${rows}in` }}>
+              {showGrid && (
+                <div className="absolute inset-0 pointer-events-none" style={{ 
+                  backgroundImage: `linear-gradient(to right, #ccc 1px, transparent 1px), linear-gradient(to bottom, #ccc 1px, transparent 1px)`,
+                  backgroundSize: '1in 1in',
+                  width: `${cols}in`,
+                  height: `${rows}in`,
+                  borderRight: '1px solid #ccc',
+                  borderBottom: '1px solid #ccc',
+                  opacity: 0.5
+                }} />
+              )}
               {pageTokens.map((p, i) => renderToken(p, i))}
             </div>
           </div>
@@ -601,16 +593,18 @@ function PrintLayout({ selectedTokens, paperSize, showGrid, printMode, showLette
                    justifyContent: 'center',
                    alignItems: 'center'
                  }}>
-              {showGrid && (
-                <div className="absolute inset-0 pointer-events-none" style={{ 
-                  backgroundImage: `linear-gradient(to right, #ccc 1px, transparent 1px), linear-gradient(to bottom, #ccc 1px, transparent 1px)`,
-                  backgroundSize: '1in 1in',
-                  width: '100%',
-                  height: '100%',
-                  opacity: 0.5
-                }} />
-              )}
               <div className="relative" style={{ width: `${cols}in`, height: `${rows}in` }}>
+                {showGrid && (
+                  <div className="absolute inset-0 pointer-events-none" style={{ 
+                    backgroundImage: `linear-gradient(to right, #ccc 1px, transparent 1px), linear-gradient(to bottom, #ccc 1px, transparent 1px)`,
+                    backgroundSize: '1in 1in',
+                    width: `${cols}in`,
+                    height: `${rows}in`,
+                    borderRight: '1px solid #ccc',
+                    borderBottom: '1px solid #ccc',
+                    opacity: 0.5
+                  }} />
+                )}
                 {pageTokens.map((p, i) => renderToken(p, i, true))}
               </div>
             </div>
