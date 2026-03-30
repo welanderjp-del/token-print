@@ -74,7 +74,7 @@ export default function App() {
     if (showSelectedOnly) {
       list = list.filter(m => selectedTokens.some(st => st.name === m.name && st.source === m.source));
     }
-    return list;
+    return list.slice(0, 150); // Limit display for performance
   }, [search, showSelectedOnly, selectedTokens]);
 
   const toggleMonster = (monster: Monster) => {
@@ -122,7 +122,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-stone-100 text-stone-900 font-sans flex flex-col" onMouseMove={handleMouseMove}>
+    <div className="h-screen bg-stone-100 text-stone-900 font-sans flex flex-col" onMouseMove={handleMouseMove}>
       {/* Header */}
       <header className="bg-white border-b border-stone-200 p-4 flex items-center justify-between sticky top-0 z-50">
         <div className="flex items-center gap-3 cursor-pointer" onClick={() => window.location.href = 'https://skolechips.dk'}>
@@ -191,7 +191,7 @@ export default function App() {
         </div>
 
         {/* Right Side: Selection & Settings */}
-        <div className="w-1/2 flex flex-col bg-stone-50">
+        <div className="w-1/2 flex flex-col bg-stone-50 overflow-y-auto custom-scrollbar">
           {/* Print Menu */}
           <div className="p-6 bg-white border-b border-stone-200 shadow-sm space-y-6">
             <div className="grid grid-cols-2 gap-6">
@@ -213,6 +213,7 @@ export default function App() {
               </div>
 
               <div className="space-y-2">
+                <label className="text-xs font-bold uppercase tracking-wider text-stone-400 invisible">Spacer</label>
                 <div className="flex gap-2">
                   <button
                     onClick={() => setShowGrid(!showGrid)}
@@ -285,7 +286,7 @@ export default function App() {
           </div>
 
           {/* Selected Tokens List */}
-          <div className="flex-1 overflow-y-auto p-6 space-y-4 custom-scrollbar">
+          <div className="p-6 space-y-4">
             {selectedTokens.length === 0 ? (
               <div className="h-full flex flex-col items-center justify-center text-stone-400 space-y-2">
                 <Printer className="w-12 h-12 opacity-20" />
