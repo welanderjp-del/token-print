@@ -72,17 +72,17 @@ export default function App() {
       list = list.filter(m => m.name.toLowerCase().includes(search.toLowerCase()));
     }
     if (showSelectedOnly) {
-      list = list.filter(m => selectedTokens.some(st => st.name === m.name && st.source === m.source));
+      list = list.filter(m => selectedTokens.some(st => st.name === m.name && st.source === m.source && st.size === m.size));
     }
     return list.slice(0, 150); // Limit display for performance
   }, [search, showSelectedOnly, selectedTokens]);
 
   const toggleMonster = (monster: Monster) => {
-    const existing = selectedTokens.find(st => st.name === monster.name && st.source === monster.source);
+    const existing = selectedTokens.find(st => st.name === monster.name && st.source === monster.source && st.size === monster.size);
     if (existing) {
       setSelectedTokens(selectedTokens.filter(st => st !== existing));
     } else {
-      setSelectedTokens([...selectedTokens, { ...monster, quantity: 1, id: `${monster.name}-${monster.source}` }]);
+      setSelectedTokens([...selectedTokens, { ...monster, quantity: 1, id: `${monster.name}-${monster.source}-${monster.size}` }]);
     }
   };
 
@@ -122,7 +122,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-stone-100 text-stone-900 font-sans flex flex-col print:min-h-0 print:p-0 print:m-0" onMouseMove={handleMouseMove}>
+    <div className="h-[100dvh] bg-stone-100 text-stone-900 font-sans flex flex-col print:h-auto print:p-0 print:m-0" onMouseMove={handleMouseMove}>
       {/* Print View (Hidden in UI, visible in print) */}
       <PrintLayout 
         selectedTokens={selectedTokens} 
@@ -172,10 +172,10 @@ export default function App() {
 
           <div className="flex-1 overflow-y-auto p-2 space-y-1 custom-scrollbar">
             {filteredMonsters.map((monster) => {
-              const isSelected = selectedTokens.some(st => st.name === monster.name && st.source === monster.source);
+              const isSelected = selectedTokens.some(st => st.name === monster.name && st.source === monster.source && st.size === monster.size);
               return (
                 <div 
-                  key={`${monster.name}-${monster.source}`}
+                  key={`${monster.name}-${monster.source}-${monster.size}`}
                   className={`group flex items-center gap-3 p-3 rounded-xl transition-all cursor-pointer ${
                     isSelected ? 'bg-orange-50 border-orange-100' : 'hover:bg-stone-50'
                   }`}
@@ -522,7 +522,7 @@ function PrintLayout({ selectedTokens, paperSize, showGrid, printMode, showLette
           <div style={{ ...style, transform: 'scaleY(-1)' }} className="flex items-center justify-center border-b border-dashed border-stone-300">
             <img src={token.tokenUrl} alt={token.name} className="w-full h-full rounded-full" referrerPolicy="no-referrer" />
             {showLetters && (
-              <div className="absolute bottom-1 left-1 w-5 h-5 bg-white border border-black rounded-full flex items-center justify-center text-[9px] font-bold z-10 transform scaleY(-1)">
+              <div className="absolute top-1 left-1 w-5 h-5 bg-white border border-black rounded-full flex items-center justify-center text-[9px] font-bold z-10 transform scaleY(-1)">
                 {letter}
               </div>
             )}
