@@ -1,0 +1,764 @@
+[
+  {
+    "name": "Aarakocra",
+    "source": "MM",
+    "size": "Tiny/Small/Medium",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Aarakocra.webp"
+  },
+  {
+    "name": "Aarakocra Aeromancer",
+    "source": "XMM",
+    "size": "Tiny/Small/Medium",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/XMM/Aarakocra%20Aeromancer.webp"
+  },
+  {
+    "name": "Aartuk Elder",
+    "source": "BAM",
+    "size": "Large",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/BAM/Aartuk%20Elder.webp"
+  },
+  {
+    "name": "Aboleth",
+    "source": "MM",
+    "size": "Large",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Aboleth.webp"
+  },
+  {
+    "name": "Abominable Yeti",
+    "source": "MM",
+    "size": "Huge",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Abominable%20Yeti.webp"
+  },
+  {
+    "name": "Adult Black Dragon",
+    "source": "MM",
+    "size": "Huge",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Adult%20Black%20Dragon.webp"
+  },
+  {
+    "name": "Ancient Black Dragon",
+    "source": "MM",
+    "size": "Gargantuan",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Ancient%20Black%20Dragon.webp"
+  },
+  {
+    "name": "Beholder",
+    "source": "MM",
+    "size": "Large",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Beholder.webp"
+  },
+  {
+    "name": "Bugbear",
+    "source": "MM",
+    "size": "Tiny/Small/Medium",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Bugbear.webp"
+  },
+  {
+    "name": "Cyclops",
+    "source": "MM",
+    "size": "Huge",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Cyclops.webp"
+  },
+  {
+    "name": "Death Knight",
+    "source": "MM",
+    "size": "Tiny/Small/Medium",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Death%20Knight.webp"
+  },
+  {
+    "name": "Dracolich",
+    "source": "MM",
+    "size": "Huge",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Adult%20Blue%20Dracolich.webp"
+  },
+  {
+    "name": "Drow",
+    "source": "MM",
+    "size": "Tiny/Small/Medium",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Drow.webp"
+  },
+  {
+    "name": "Fire Giant",
+    "source": "MM",
+    "size": "Huge",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Fire%20Giant.webp"
+  },
+  {
+    "name": "Frost Giant",
+    "source": "MM",
+    "size": "Huge",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Frost%20Giant.webp"
+  },
+  {
+    "name": "Gelatinous Cube",
+    "source": "MM",
+    "size": "Large",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Gelatinous%20Cube.webp"
+  },
+  {
+    "name": "Ghoul",
+    "source": "MM",
+    "size": "Tiny/Small/Medium",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Ghoul.webp"
+  },
+  {
+    "name": "Gnoll",
+    "source": "MM",
+    "size": "Tiny/Small/Medium",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Gnoll.webp"
+  },
+  {
+    "name": "Goblin",
+    "source": "MM",
+    "size": "Tiny/Small/Medium",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Goblin.webp"
+  },
+  {
+    "name": "Hill Giant",
+    "source": "MM",
+    "size": "Huge",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Hill%20Giant.webp"
+  },
+  {
+    "name": "Hobgoblin",
+    "source": "MM",
+    "size": "Tiny/Small/Medium",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Hobgoblin.webp"
+  },
+  {
+    "name": "Hydra",
+    "source": "MM",
+    "size": "Huge",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Hydra.webp"
+  },
+  {
+    "name": "Kobold",
+    "source": "MM",
+    "size": "Tiny/Small/Medium",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Kobold.webp"
+  },
+  {
+    "name": "Lich",
+    "source": "MM",
+    "size": "Tiny/Small/Medium",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Lich.webp"
+  },
+  {
+    "name": "Mind Flayer",
+    "source": "MM",
+    "size": "Tiny/Small/Medium",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Mind%20Flayer.webp"
+  },
+  {
+    "name": "Minotaur",
+    "source": "MM",
+    "size": "Large",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Minotaur.webp"
+  },
+  {
+    "name": "Mummy",
+    "source": "MM",
+    "size": "Tiny/Small/Medium",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Mummy.webp"
+  },
+  {
+    "name": "Orc",
+    "source": "MM",
+    "size": "Tiny/Small/Medium",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Orc.webp"
+  },
+  {
+    "name": "Owlbear",
+    "source": "MM",
+    "size": "Large",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Owlbear.webp"
+  },
+  {
+    "name": "Purple Worm",
+    "source": "MM",
+    "size": "Gargantuan",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Purple%20Worm.webp"
+  },
+  {
+    "name": "Skeleton",
+    "source": "MM",
+    "size": "Tiny/Small/Medium",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Skeleton.webp"
+  },
+  {
+    "name": "Specter",
+    "source": "MM",
+    "size": "Tiny/Small/Medium",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Specter.webp"
+  },
+  {
+    "name": "Stone Giant",
+    "source": "MM",
+    "size": "Huge",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Stone%20Giant.webp"
+  },
+  {
+    "name": "Storm Giant",
+    "source": "MM",
+    "size": "Huge",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Storm%20Giant.webp"
+  },
+  {
+    "name": "Troll",
+    "source": "MM",
+    "size": "Large",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Troll.webp"
+  },
+  {
+    "name": "Vampire",
+    "source": "MM",
+    "size": "Tiny/Small/Medium",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Vampire.webp"
+  },
+  {
+    "name": "Wight",
+    "source": "MM",
+    "size": "Tiny/Small/Medium",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Wight.webp"
+  },
+  {
+    "name": "Wraith",
+    "source": "MM",
+    "size": "Tiny/Small/Medium",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Wraith.webp"
+  },
+  {
+    "name": "Zombie",
+    "source": "MM",
+    "size": "Tiny/Small/Medium",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Zombie.webp"
+  },
+  {
+    "name": "Aartuk Starhorror",
+    "source": "BAM",
+    "size": "Tiny/Small/Medium",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/BAM/Aartuk%20Starhorror.webp"
+  },
+  {
+    "name": "Aberrant Cultist",
+    "source": "XMM",
+    "size": "Tiny/Small/Medium",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/XMM/Aberrant%20Cultist.webp"
+  },
+  {
+    "name": "Aboleth",
+    "source": "XMM",
+    "size": "Large",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/XMM/Aboleth.webp"
+  },
+  {
+    "name": "Adult Amethyst Dragon",
+    "source": "FTD",
+    "size": "Huge",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/FTD/Adult%20Amethyst%20Dragon.webp"
+  },
+  {
+    "name": "Air Elemental",
+    "source": "MM",
+    "size": "Large",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Air%20Elemental.webp"
+  },
+  {
+    "name": "Ancient Gold Dragon",
+    "source": "MM",
+    "size": "Gargantuan",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Ancient%20Gold%20Dragon.webp"
+  },
+  {
+    "name": "Ancient Red Dragon",
+    "source": "MM",
+    "size": "Gargantuan",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Ancient%20Red%20Dragon.webp"
+  },
+  {
+    "name": "Animated Armor",
+    "source": "MM",
+    "size": "Tiny/Small/Medium",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Animated%20Armor.webp"
+  },
+  {
+    "name": "Banshee",
+    "source": "MM",
+    "size": "Tiny/Small/Medium",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Banshee.webp"
+  },
+  {
+    "name": "Basilisk",
+    "source": "MM",
+    "size": "Tiny/Small/Medium",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Basilisk.webp"
+  },
+  {
+    "name": "Black Pudding",
+    "source": "MM",
+    "size": "Large",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Black%20Pudding.webp"
+  },
+  {
+    "name": "Blink Dog",
+    "source": "MM",
+    "size": "Tiny/Small/Medium",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Blink%20Dog.webp"
+  },
+  {
+    "name": "Chimera",
+    "source": "MM",
+    "size": "Large",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Chimera.webp"
+  },
+  {
+    "name": "Chuul",
+    "source": "MM",
+    "size": "Large",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Chuul.webp"
+  },
+  {
+    "name": "Cloaker",
+    "source": "MM",
+    "size": "Large",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Cloaker.webp"
+  },
+  {
+    "name": "Cockatrice",
+    "source": "MM",
+    "size": "Tiny/Small/Medium",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Cockatrice.webp"
+  },
+  {
+    "name": "Couatl",
+    "source": "MM",
+    "size": "Tiny/Small/Medium",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Couatl.webp"
+  },
+  {
+    "name": "Death Dog",
+    "source": "MM",
+    "size": "Tiny/Small/Medium",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Death%20Dog.webp"
+  },
+  {
+    "name": "Deva",
+    "source": "MM",
+    "size": "Tiny/Small/Medium",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Deva.webp"
+  },
+  {
+    "name": "Displacer Beast",
+    "source": "MM",
+    "size": "Large",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Displacer%20Beast.webp"
+  },
+  {
+    "name": "Doppelganger",
+    "source": "MM",
+    "size": "Tiny/Small/Medium",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Doppelganger.webp"
+  },
+  {
+    "name": "Drider",
+    "source": "MM",
+    "size": "Large",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Drider.webp"
+  },
+  {
+    "name": "Dryad",
+    "source": "MM",
+    "size": "Tiny/Small/Medium",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Dryad.webp"
+  },
+  {
+    "name": "Earth Elemental",
+    "source": "MM",
+    "size": "Large",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Earth%20Elemental.webp"
+  },
+  {
+    "name": "Ettin",
+    "source": "MM",
+    "size": "Large",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Ettin.webp"
+  },
+  {
+    "name": "Fire Elemental",
+    "source": "MM",
+    "size": "Large",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Fire%20Elemental.webp"
+  },
+  {
+    "name": "Flameskull",
+    "source": "MM",
+    "size": "Tiny/Small/Medium",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Flameskull.webp"
+  },
+  {
+    "name": "Flesh Golem",
+    "source": "MM",
+    "size": "Tiny/Small/Medium",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Flesh%20Golem.webp"
+  },
+  {
+    "name": "Galeb Duhr",
+    "source": "MM",
+    "size": "Tiny/Small/Medium",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Galeb%20Duhr.webp"
+  },
+  {
+    "name": "Gargoyle",
+    "source": "MM",
+    "size": "Tiny/Small/Medium",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Gargoyle.webp"
+  },
+  {
+    "name": "Githyanki Knight",
+    "source": "MM",
+    "size": "Tiny/Small/Medium",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Githyanki%20Knight.webp"
+  },
+  {
+    "name": "Githzerai Monk",
+    "source": "MM",
+    "size": "Tiny/Small/Medium",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Githzerai%20Monk.webp"
+  },
+  {
+    "name": "Glabrezu",
+    "source": "MM",
+    "size": "Large",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Glabrezu.webp"
+  },
+  {
+    "name": "Grell",
+    "source": "MM",
+    "size": "Tiny/Small/Medium",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Grell.webp"
+  },
+  {
+    "name": "Grick",
+    "source": "MM",
+    "size": "Tiny/Small/Medium",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Grick.webp"
+  },
+  {
+    "name": "Griffon",
+    "source": "MM",
+    "size": "Large",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Griffon.webp"
+  },
+  {
+    "name": "Guardian Naga",
+    "source": "MM",
+    "size": "Large",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Guardian%20Naga.webp"
+  },
+  {
+    "name": "Harpy",
+    "source": "MM",
+    "size": "Tiny/Small/Medium",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Harpy.webp"
+  },
+  {
+    "name": "Hell Hound",
+    "source": "MM",
+    "size": "Tiny/Small/Medium",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Hell%20Hound.webp"
+  },
+  {
+    "name": "Helmed Horror",
+    "source": "MM",
+    "size": "Tiny/Small/Medium",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Helmed%20Horror.webp"
+  },
+  {
+    "name": "Hezrou",
+    "source": "MM",
+    "size": "Large",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Hezrou.webp"
+  },
+  {
+    "name": "Homunculus",
+    "source": "MM",
+    "size": "Tiny/Small/Medium",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Homunculus.webp"
+  },
+  {
+    "name": "Hook Horror",
+    "source": "MM",
+    "size": "Large",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Hook%20Horror.webp"
+  },
+  {
+    "name": "Invisible Stalker",
+    "source": "MM",
+    "size": "Tiny/Small/Medium",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Invisible%20Stalker.webp"
+  },
+  {
+    "name": "Iron Golem",
+    "source": "MM",
+    "size": "Large",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Iron%20Golem.webp"
+  },
+  {
+    "name": "Jackalwere",
+    "source": "MM",
+    "size": "Tiny/Small/Medium",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Jackalwere.webp"
+  },
+  {
+    "name": "Kraken",
+    "source": "MM",
+    "size": "Gargantuan",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Kraken.webp"
+  },
+  {
+    "name": "Lamia",
+    "source": "MM",
+    "size": "Large",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Lamia.webp"
+  },
+  {
+    "name": "Manticore",
+    "source": "MM",
+    "size": "Large",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Manticore.webp"
+  },
+  {
+    "name": "Marilith",
+    "source": "MM",
+    "size": "Large",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Marilith.webp"
+  },
+  {
+    "name": "Medusa",
+    "source": "MM",
+    "size": "Tiny/Small/Medium",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Medusa.webp"
+  },
+  {
+    "name": "Mezzoloth",
+    "source": "MM",
+    "size": "Tiny/Small/Medium",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Mezzoloth.webp"
+  },
+  {
+    "name": "Night Hag",
+    "source": "MM",
+    "size": "Tiny/Small/Medium",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Night%20Hag.webp"
+  },
+  {
+    "name": "Nightmare",
+    "source": "MM",
+    "size": "Large",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Nightmare.webp"
+  },
+  {
+    "name": "Nycaloth",
+    "source": "MM",
+    "size": "Large",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Nycaloth.webp"
+  },
+  {
+    "name": "Oni",
+    "source": "MM",
+    "size": "Large",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Oni.webp"
+  },
+  {
+    "name": "Otyugh",
+    "source": "MM",
+    "size": "Large",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Otyugh.webp"
+  },
+  {
+    "name": "Pegasus",
+    "source": "MM",
+    "size": "Large",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Pegasus.webp"
+  },
+  {
+    "name": "Pit Fiend",
+    "source": "MM",
+    "size": "Large",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Pit%20Fiend.webp"
+  },
+  {
+    "name": "Planetar",
+    "source": "MM",
+    "size": "Large",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Planetar.webp"
+  },
+  {
+    "name": "Quasit",
+    "source": "MM",
+    "size": "Tiny/Small/Medium",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Quasit.webp"
+  },
+  {
+    "name": "Rakshasa",
+    "source": "MM",
+    "size": "Tiny/Small/Medium",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Rakshasa.webp"
+  },
+  {
+    "name": "Remorhaz",
+    "source": "MM",
+    "size": "Huge",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Remorhaz.webp"
+  },
+  {
+    "name": "Revenant",
+    "source": "MM",
+    "size": "Tiny/Small/Medium",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Revenant.webp"
+  },
+  {
+    "name": "Roc",
+    "source": "MM",
+    "size": "Gargantuan",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Roc.webp"
+  },
+  {
+    "name": "Roper",
+    "source": "MM",
+    "size": "Large",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Roper.webp"
+  },
+  {
+    "name": "Rust Monster",
+    "source": "MM",
+    "size": "Tiny/Small/Medium",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Rust%20Monster.webp"
+  },
+  {
+    "name": "Salamander",
+    "source": "MM",
+    "size": "Large",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Salamander.webp"
+  },
+  {
+    "name": "Shambling Mound",
+    "source": "MM",
+    "size": "Large",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Shambling%20Mound.webp"
+  },
+  {
+    "name": "Shield Guardian",
+    "source": "MM",
+    "size": "Large",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Shield%20Guardian.webp"
+  },
+  {
+    "name": "Solar",
+    "source": "MM",
+    "size": "Large",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Solar.webp"
+  },
+  {
+    "name": "Spectator",
+    "source": "MM",
+    "size": "Tiny/Small/Medium",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Spectator.webp"
+  },
+  {
+    "name": "Spirit Naga",
+    "source": "MM",
+    "size": "Large",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Spirit%20Naga.webp"
+  },
+  {
+    "name": "Succubus",
+    "source": "MM",
+    "size": "Tiny/Small/Medium",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Succubus.webp"
+  },
+  {
+    "name": "Treant",
+    "source": "MM",
+    "size": "Huge",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Treant.webp"
+  },
+  {
+    "name": "Tyrannosaurus Rex",
+    "source": "MM",
+    "size": "Huge",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Tyrannosaurus%20Rex.webp"
+  },
+  {
+    "name": "Ultroloth",
+    "source": "MM",
+    "size": "Tiny/Small/Medium",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Ultroloth.webp"
+  },
+  {
+    "name": "Umber Hulk",
+    "source": "MM",
+    "size": "Large",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Umber%20Hulk.webp"
+  },
+  {
+    "name": "Unicorn",
+    "source": "MM",
+    "size": "Large",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Unicorn.webp"
+  },
+  {
+    "name": "Vrock",
+    "source": "MM",
+    "size": "Large",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Vrock.webp"
+  },
+  {
+    "name": "Water Elemental",
+    "source": "MM",
+    "size": "Large",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Water%20Elemental.webp"
+  },
+  {
+    "name": "Water Weird",
+    "source": "MM",
+    "size": "Large",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Water%20Weird.webp"
+  },
+  {
+    "name": "Will-o'-Wisp",
+    "source": "MM",
+    "size": "Tiny/Small/Medium",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Will-o'-Wisp.webp"
+  },
+  {
+    "name": "Wyvern",
+    "source": "MM",
+    "size": "Large",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Wyvern.webp"
+  },
+  {
+    "name": "Xorn",
+    "source": "MM",
+    "size": "Tiny/Small/Medium",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Xorn.webp"
+  },
+  {
+    "name": "Yochlol",
+    "source": "MM",
+    "size": "Tiny/Small/Medium",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Yochlol.webp"
+  },
+  {
+    "name": "Yuan-ti Abomination",
+    "source": "MM",
+    "size": "Large",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Yuan-ti%20Abomination.webp"
+  },
+  {
+    "name": "Tarrasque",
+    "source": "MM",
+    "size": "Gargantuan",
+    "tokenUrl": "https://5e.tools/img/bestiary/tokens/MM/Tarrasque.webp"
+  }
+]
